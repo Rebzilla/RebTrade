@@ -13,12 +13,20 @@ namespace DataAccessLayer
 
         public Role GetRole(int roleId)
         {
+            //using (TradersMarketPlaceEntities tm = new TradersMarketPlaceEntities()) //this doesnt work well
+            //{
+                //return tm.Roles.SingleOrDefault(r => r.RoleID == roleId);
+            //}
+
             return Entity.Roles.SingleOrDefault(r => r.RoleID == roleId);
         }
 
         public IQueryable<Role> GetAllRoles()
         {
-            return Entity.Roles;
+            using (TradersMarketPlaceEntities tm = new TradersMarketPlaceEntities())
+            {
+                return tm.Roles;
+            }
         }
 
 
@@ -34,14 +42,11 @@ namespace DataAccessLayer
 
         public void AllocateRole(User user, Role role)
         {
-            user.Roles.Add(role);
-            Entity.SaveChanges();
-        }
-
-        public void DeallocateRole(User u, Role r)
-        {
-            u.Roles.Remove(r);
-            Entity.SaveChanges();
+            using (TradersMarketPlaceEntities tm = new TradersMarketPlaceEntities())
+            {
+                user.Roles.Add(role);
+                tm.SaveChanges();
+            }
         }
 
         public bool IsUserInRole(string username, int roleId)
@@ -57,7 +62,6 @@ namespace DataAccessLayer
                 return true;
             }
         }
-    }
 
     }
 }

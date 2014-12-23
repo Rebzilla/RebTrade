@@ -14,8 +14,11 @@ namespace DataAccessLayer
         //register
         public void AddUser(User myNewUser)
         {
-            Entity.Users.Add(myNewUser);
-            Entity.SaveChanges();
+            using (TradersMarketPlaceEntities tm = new TradersMarketPlaceEntities())
+            {
+                tm.Users.Add(myNewUser);
+                tm.SaveChanges();
+            }
         }
 
         public bool DoesUserNameExist(string username)
@@ -36,12 +39,18 @@ namespace DataAccessLayer
             {
                 return false;
             }
-            else return true;
+            else
+            {
+                return true;
+            }
         }
 
         public User GetUser(string username)
         {
-            return Entity.Users.SingleOrDefault(u => u.Username.ToLower() == username.ToLower());
+            using (TradersMarketPlaceEntities tm = new TradersMarketPlaceEntities())
+            {
+                return tm.Users.SingleOrDefault(u => u.Username.ToLower() == username.ToLower());
+            }
         }
 
         //login
