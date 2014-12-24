@@ -21,26 +21,30 @@ namespace TradersMarketplace.Controllers
         [HttpPost]
         public ActionResult Register(RegisterModel data)
         {
-            UsersBL ubl = new UsersBL();
-            if ((ubl.DoesUserNameExist(data.Username)) == true)
+            if (ModelState.IsValid)
             {
-                ViewBag.Message += "\n Username already exists";
-                return View();
-            }
-            if ((ubl.DoesEmailExist(data.Email)) == true)
-            {
-                ViewBag.Message += "\n E-mail address already exists";
-                return View();
-            }
-            else
-            {
-                ViewBag.Message = "";
-                ubl.AddUser(data.Username, data.Password, data.Name, data.Surname, data.Email, data.Residence,
-                    data.Street, data.Town, data.Country);
+                UsersBL ubl = new UsersBL();
+                if ((ubl.DoesUserNameExist(data.Username)) == true)
+                {
+                    ViewBag.Message += "\n Username already exists";
+                    return View();
+                }
+                if ((ubl.DoesEmailExist(data.Email)) == true)
+                {
+                    ViewBag.Message += "\n E-mail address already exists";
+                    return View();
+                }
+                else
+                {
+                    ViewBag.Message = "";
+                    ubl.AddUser(data.Role, data.Username, data.Password, data.Name, data.Surname, data.Email, data.Residence,
+                        data.Street, data.Town, data.Country);
 
-                //firstbuq, 2nd controller name
-                return RedirectToAction("Login", "Login");
+                    //firstbuq, 2nd controller name
+                    return RedirectToAction("Login", "Login");
+                }
             }
+            return View();
         }
     }
 }

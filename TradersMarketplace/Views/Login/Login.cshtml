@@ -13,6 +13,7 @@
 @using (Html.BeginForm()) 
 {
     @Html.ValidationSummary(true)
+    <p style="color: red;">@ViewBag.Message</p>
     <fieldset>
         <legend>Login</legend>
 

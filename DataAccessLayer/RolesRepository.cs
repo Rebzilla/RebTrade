@@ -11,6 +11,15 @@ namespace DataAccessLayer
     {
         public RolesRepository() : base() { }
 
+        public Role GetRoleByRoleName(string roleName)
+        {
+            //return Entity.Roles.SingleOrDefault(r => r.RoleName == roleName);
+            using(TradersMarketPlaceEntities tm = new TradersMarketPlaceEntities())
+            {
+               return tm.Roles.SingleOrDefault(r => r.RoleName == roleName);
+            }
+        }
+
         public Role GetRole(int roleId)
         {
             //using (TradersMarketPlaceEntities tm = new TradersMarketPlaceEntities()) //this doesnt work well
@@ -42,11 +51,8 @@ namespace DataAccessLayer
 
         public void AllocateRole(User user, Role role)
         {
-            using (TradersMarketPlaceEntities tm = new TradersMarketPlaceEntities())
-            {
-                user.Roles.Add(role);
-                tm.SaveChanges();
-            }
+            user.Roles.Add(role);
+            Entity.SaveChanges();
         }
 
         public bool IsUserInRole(string username, int roleId)
@@ -62,6 +68,5 @@ namespace DataAccessLayer
                 return true;
             }
         }
-
     }
 }

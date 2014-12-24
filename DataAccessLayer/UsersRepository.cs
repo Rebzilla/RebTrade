@@ -47,10 +47,7 @@ namespace DataAccessLayer
 
         public User GetUser(string username)
         {
-            using (TradersMarketPlaceEntities tm = new TradersMarketPlaceEntities())
-            {
-                return tm.Users.SingleOrDefault(u => u.Username.ToLower() == username.ToLower());
-            }
+            return Entity.Users.SingleOrDefault(u => u.Username.ToLower() == username.ToLower());
         }
 
         //login

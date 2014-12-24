@@ -23,24 +23,28 @@ namespace TradersMarketplace.Controllers
         [HttpPost]
         public ActionResult Login(LoginModel data)
         {
-            try
+            if (ModelState.IsValid)
             {
-                if(new UsersBL().AuthenticateUser(data.Username, data.Password))
+                try
                 {
-                    FormsAuthentication.RedirectFromLoginPage(data.Username, true);
-                    return RedirectToAction("Index", "Home");
+                    if (new UsersBL().AuthenticateUser(data.Username, data.Password))
+                    {
+                        FormsAuthentication.RedirectFromLoginPage(data.Username, true);
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else //does not exist
+                    {
+                        ViewBag.Message = "Incorrect Login Details";
+                        return View();
+                    }
                 }
-                else //does not exist
+                catch (Exception ex)
                 {
-                    ViewBag.Message = "Incorrect Login Details";
-                    return View();
+                    ModelState.AddModelError("", "Incorrect Login Details");
+                    return View(data);
                 }
             }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError("", "Incorrect Login Details");
-                return View(data);
-            }
+            return View();
         }
 
         public ActionResult LogOff()
