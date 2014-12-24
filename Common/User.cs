@@ -19,6 +19,7 @@ namespace Common
             this.Carts = new HashSet<Cart>();
             this.Orders = new HashSet<Order>();
             this.Products = new HashSet<Product>();
+            this.Products1 = new HashSet<Product>();
             this.Roles = new HashSet<Role>();
         }
     
@@ -35,6 +36,7 @@ namespace Common
         public virtual ICollection<Cart> Carts { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
         public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<Product> Products1 { get; set; }
         public virtual ICollection<Role> Roles { get; set; }
     }
 }

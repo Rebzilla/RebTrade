@@ -21,6 +21,7 @@ namespace Common
         }
     
         public int ProductID { get; set; }
+        public string ProductName { get; set; }
         public string SellerUsername { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }
@@ -32,5 +33,6 @@ namespace Common
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
         public virtual ProductCategory ProductCategory { get; set; }
         public virtual User User { get; set; }
+        public virtual User User1 { get; set; }
     }
 }

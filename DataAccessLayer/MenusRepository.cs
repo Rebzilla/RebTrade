@@ -14,7 +14,6 @@ namespace DataAccessLayer
         public IQueryable<Menu> GetMainMenus(int roleId)
         {
             Role r = new RolesRepository().GetRole(roleId);
-            //return r.Menus.OrderBy(m => m.Position).AsQueryable(); //error here and its probably because no menu items are loading
             return r.Menus.AsQueryable().OrderBy(m => m.Position);
         }
 
