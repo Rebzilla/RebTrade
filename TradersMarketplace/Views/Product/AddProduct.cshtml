@@ -1,0 +1,59 @@
+﻿@model TradersMarketplace.Models.ProductModel
+
+@{
+    ViewBag.Title = "AddProduct";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>AddProduct</h2>
+@ViewBag.Message
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <p style="color: red;">@ViewBag.Message</p>
+    <fieldset>
+        <legend>Login</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProductName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ProductName)
+            @Html.ValidationMessageFor(model => model.ProductName)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Description)
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Price)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Price)
+            @Html.ValidationMessageFor(model => model.Price)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.StockQty)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.StockQty)
+            @Html.ValidationMessageFor(model => model.StockQty)
+        </div>
+        @*<div class="editor-label">
+            @Html.LabelFor(model => model.CategoryName)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.CategoryName, Model.Categories, "--Select Product Category--", new { id = "ddlCategories" })
+            @Html.ValidationMessageFor(model => model.CategoryName)
+        </div>*@
+        <p>
+            <input type="submit" value="Add Product" />
+        </p>
+    </fieldset>
+}
