@@ -20,7 +20,6 @@ namespace TradersMarketplace.Controllers
             return View(pm);
         }
 
-
         [HttpPost]
         public ActionResult Index(ProductModel data, HttpPostedFileBase file)
         {

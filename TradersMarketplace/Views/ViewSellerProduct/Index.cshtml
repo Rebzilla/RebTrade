@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Common.Views.ProductsView>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>View Products</h2>
+<script type="text/javascript">
+
+    function deleteProduct(id)
+    {
+        var param = {pID: id}
+        $.ajax({
+            url: '@Url.Action("DeleteProductByID")',
+            type: "POST",
+            datatype: "json",
+            data: param,
+            error: function (xmlHttpRequest, errorText, thrownError) {
+                alert(xmlHttpRequest + "|" + errorText + "|" + thrownError);
+            },
+            success: function (data) {
+                alert("Product has been deleted");
+            }
+        });
+    }
+</script>
+
+<div id="divResult">
+</div>
+<table>
+    <tr>
+        <th>Product Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Image</th>
+        <th>Stock Quantity</th>
+        <th>Category Name</th>
+    </tr>
+
+    @foreach (var item in Model)
+{
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                <img height="150px" width="150px" src="@Url.Content(item.Image)" alt="@Html.DisplayFor(modelItem => item.Image)" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StockQty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+            <td>
+                <button type="button" onclick="editProduct(@item.ProductID)">Edit Product</button>
+            </td>
+            <td>
+                <button type="button" onclick="deleteProduct(@item.ProductID)">Delete Product</button>
+            </td>
+        </tr>
+            }
+</table>
