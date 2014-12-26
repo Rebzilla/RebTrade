@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Common.Views.ProductsView>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "View Products";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -21,6 +21,23 @@
             },
             success: function (data) {
                 alert("Product has been deleted");
+                window.location = "ViewSellerProduct";
+            }
+        });
+    }
+
+    function editProduct(id) {
+        var param = { pID: id }
+        $.ajax({
+            url: '@Url.Action("EditProduct")',
+            type: "GET",
+            datatype: "json",
+            data: param,
+            error: function (xmlHttpRequest, errorText, thrownError) {
+                alert(xmlHttpRequest + "|" + errorText + "|" + thrownError);
+            },
+            success: function (data) {
+                alert("Redirecting");
             }
         });
     }
@@ -48,7 +65,7 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Price)
+                €@Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
                 <img height="150px" width="150px" src="@Url.Content(item.Image)" alt="@Html.DisplayFor(modelItem => item.Image)" />
@@ -60,7 +77,8 @@
                 @Html.DisplayFor(modelItem => item.CategoryName)
             </td>
             <td>
-                <button type="button" onclick="editProduct(@item.ProductID)">Edit Product</button>
+                @*@Html.ActionLink("Edit Product", "EditProduct", new { id = item.ProductID })*@
+                <input type="button" value="Edit Product" onclick="location.href='@Url.Action("EditProduct", "ViewSellerProduct", new { id = item.ProductID })'" />
             </td>
             <td>
                 <button type="button" onclick="deleteProduct(@item.ProductID)">Delete Product</button>

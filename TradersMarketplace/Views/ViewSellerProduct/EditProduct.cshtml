@@ -1,0 +1,65 @@
+﻿@model Common.Product
+
+@{
+    ViewBag.Title = "Edit Product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit Product</h2>
+
+@using (Html.BeginForm("EditProduct", "ViewSellerProduct", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.ProductID)
+
+    <div>
+        @Html.LabelFor(model => model.ProductName, "Product Name")
+        @Html.EditorFor(model => model.ProductName)
+        @Html.ValidationMessageFor(model => model.ProductName)
+    </div>
+
+    <br />
+    <div>
+        @Html.LabelFor(model => model.Description)
+        @Html.EditorFor(model => model.Description)
+        @Html.ValidationMessageFor(model => model.Description)
+    </div>
+
+    <br />
+    <div>
+        @Html.LabelFor(model => model.Price)
+        @Html.EditorFor(model => model.Price)
+        @Html.ValidationMessageFor(model => model.Price)
+    </div>
+
+    <br />
+
+    <div>
+        @Html.Label("Product Category")
+        @Html.DropDownListFor(model => model.CategoryID, (IEnumerable<SelectListItem>)ViewData["categoriesList"], "--Select Product Category--")
+        @Html.ValidationMessageFor(model => model.CategoryID)
+    </div>
+    <br />
+    <div>
+        @Html.Label("Image") <br />
+        <img src="@Model.ImageLink" width="150" height="150" alt="image" /><br />
+        <input type="file" name="file" id="file" />
+    </div>
+
+    <br />
+    <div>
+        @Html.LabelFor(model => model.StockQty, "Stock Quantity")
+        @Html.EditorFor(model => model.StockQty)
+        @Html.ValidationMessageFor(model => model.StockQty)
+    </div>
+
+    <div>
+        <input type="submit" value="Save" />
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to View Products", "Index")
+</div>
