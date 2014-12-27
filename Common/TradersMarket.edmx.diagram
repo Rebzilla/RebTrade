@@ -11,7 +11,7 @@
         <EntityTypeShape EntityType="TradersMarketPlaceModel.OrderDetail" Width="1.5" PointX="12.75" PointY="7.875" />
         <EntityTypeShape EntityType="TradersMarketPlaceModel.Product" Width="1.5" PointX="10.5" PointY="4" />
         <EntityTypeShape EntityType="TradersMarketPlaceModel.ProductCategory" Width="1.5" PointX="8.25" PointY="2" />
-        <EntityTypeShape EntityType="TradersMarketPlaceModel.Role" Width="1.5" PointX="3" PointY="4.75" />
+        <EntityTypeShape EntityType="TradersMarketPlaceModel.Role" Width="1.5" PointX="3" PointY="4.875" />
         <EntityTypeShape EntityType="TradersMarketPlaceModel.User" Width="1.5" PointX="5.25" PointY="3.75" />
         <AssociationConnector Association="TradersMarketPlaceModel.FK_Cart_Product" />
         <AssociationConnector Association="TradersMarketPlaceModel.FK_Cart_User" />
@@ -23,7 +23,6 @@
         <AssociationConnector Association="TradersMarketPlaceModel.FK_Product_User1" />
         <AssociationConnector Association="TradersMarketPlaceModel.FK_User_Role" />
         <AssociationConnector Association="TradersMarketPlaceModel.MenuRoles" />
-        <AssociationConnector Association="TradersMarketPlaceModel.UserRole" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

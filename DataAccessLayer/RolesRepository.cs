@@ -41,31 +41,43 @@ namespace DataAccessLayer
 
         public IQueryable<Role> GetUserRoles(string username)
         {
-            return new UsersRepository().GetUser(username).Roles.AsQueryable();
+            //return new UsersRepository().GetUser(username).Roles.AsQueryable();
+            User u = Entity.Users.SingleOrDefault(x => x.Username == username);
+            return Entity.Roles.Where(r => r.RoleID == u.RoleID).AsQueryable();
         }
 
         public IQueryable<User> GetUsers(int roleId)
         {
-            return GetRole(roleId).Users.AsQueryable();
+            //return GetRole(roleId).Users.AsQueryable();
+            return Entity.Users.Where(u => u.RoleID == roleId).AsQueryable();
         }
 
-        public void AllocateRole(User user, Role role)
-        {
-            user.Roles.Add(role);
-            Entity.SaveChanges();
-        }
+        //public void AllocateRole(User user, Role role)
+        //{
+        //    user.Roles.Add(role);
+        //    Entity.SaveChanges();
+        //}
 
         public bool IsUserInRole(string username, int roleId)
         {
-            User u = new UsersRepository().GetUser(username);
-            if (u.Roles.SingleOrDefault(r => r.RoleID == roleId) == null)
-            {
+            //User u = new UsersRepository().GetUser(username);
+            //if (u.Roles.SingleOrDefault(r => r.RoleID == roleId) == null)
+            //{
 
-                return false;
-            }
-            else 
+            //    return false;
+            //}
+            //else 
+            //{
+            //    return true;
+            //}
+            User u = new UsersRepository().GetUser(username);
+            if (u.RoleID == roleId)
             {
                 return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }

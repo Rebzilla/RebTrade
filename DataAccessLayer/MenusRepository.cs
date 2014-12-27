@@ -19,15 +19,21 @@ namespace DataAccessLayer
 
         public IQueryable<Menu> GetMainMenusByUsername(string username)
         {
-            var list = (
-                    from u in Entity.Users
-                    from r in u.Roles
+            //var list = (
+            //        from u in Entity.Users
+            //        from r in u.Roles
+            //        from m in r.Menus
+            //        where u.Username == username
+            //        orderby m.Position
+            //        select m
+            //    ).Distinct();
+            //return list.AsQueryable();
+            Role r = new RolesRepository().GetUserRoles(username).First();
+            return (
                     from m in r.Menus
-                    where u.Username == username
                     orderby m.Position
                     select m
-                ).Distinct();
-            return list.AsQueryable();
+                ).AsQueryable();
         }
 
     }

@@ -22,10 +22,12 @@ namespace TradersMarketplace.Controllers
             return View("Index", users);
         }
 
-        //delete by product id
-        public void DeleteUserByUsername(string username)
+        //delete by username
+        public ActionResult DeleteUserByUsername(string username)
         {
             new UsersBL().DeleteUser(username);
+            List<UsersView> users = new UsersBL().GetUsers().ToList();
+            return View("Index", users);
         }
 
         //edit method 1

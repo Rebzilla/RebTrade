@@ -91,14 +91,6 @@
           <Property Name="Country" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="RoleID" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="UserRole">
-          <Key>
-            <PropertyRef Name="Username" />
-            <PropertyRef Name="RoleID" />
-          </Key>
-          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="RoleID" Type="int" Nullable="false" />
-        </EntityType>
         <Association Name="FK_Cart_Product">
           <End Role="Product" Type="Self.Product" Multiplicity="1" />
           <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
@@ -231,30 +223,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserRole_Role">
-          <End Role="Role" Type="Self.Role" Multiplicity="1" />
-          <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Role">
-              <PropertyRef Name="RoleID" />
-            </Principal>
-            <Dependent Role="UserRole">
-              <PropertyRef Name="RoleID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserRole_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Username" />
-            </Principal>
-            <Dependent Role="UserRole">
-              <PropertyRef Name="Username" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="TradersMarketPlaceModelStoreContainer">
           <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
@@ -265,7 +233,6 @@
           <EntitySet Name="ProductCategory" EntityType="Self.ProductCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Cart_Product" Association="Self.FK_Cart_Product">
             <End Role="Product" EntitySet="Product" />
             <End Role="Cart" EntitySet="Cart" />
@@ -309,14 +276,6 @@
           <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
             <End Role="Role" EntitySet="Role" />
             <End Role="User" EntitySet="User" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserRole_Role" Association="Self.FK_UserRole_Role">
-            <End Role="Role" EntitySet="Role" />
-            <End Role="UserRole" EntitySet="UserRole" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserRole_User" Association="Self.FK_UserRole_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="UserRole" EntitySet="UserRole" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -371,10 +330,6 @@
           <AssociationSet Name="MenuRoles" Association="TradersMarketPlaceModel.MenuRoles">
             <End Role="Menu" EntitySet="Menus" />
             <End Role="Role" EntitySet="Roles" />
-          </AssociationSet>
-          <AssociationSet Name="UserRole" Association="TradersMarketPlaceModel.UserRole">
-            <End Role="Role" EntitySet="Roles" />
-            <End Role="User" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Cart">
@@ -454,7 +409,6 @@
           <Property Name="RoleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Users" Relationship="TradersMarketPlaceModel.FK_User_Role" FromRole="Role" ToRole="User" />
           <NavigationProperty Name="Menus" Relationship="TradersMarketPlaceModel.MenuRoles" FromRole="Role" ToRole="Menu" />
-          <NavigationProperty Name="Users1" Relationship="TradersMarketPlaceModel.UserRole" FromRole="Role" ToRole="User" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -475,7 +429,6 @@
           <NavigationProperty Name="Products" Relationship="TradersMarketPlaceModel.FK_Product_User" FromRole="User" ToRole="Product" />
           <NavigationProperty Name="Products1" Relationship="TradersMarketPlaceModel.FK_Product_User1" FromRole="User" ToRole="Product" />
           <NavigationProperty Name="Role" Relationship="TradersMarketPlaceModel.FK_User_Role" FromRole="User" ToRole="Role" />
-          <NavigationProperty Name="Roles" Relationship="TradersMarketPlaceModel.UserRole" FromRole="User" ToRole="Role" />
         </EntityType>
         <Association Name="FK_Cart_Product">
           <End Type="TradersMarketPlaceModel.Product" Role="Product" Multiplicity="1" />
@@ -589,10 +542,6 @@
           <End Type="TradersMarketPlaceModel.Menu" Role="Menu" Multiplicity="*" />
           <End Type="TradersMarketPlaceModel.Role" Role="Role" Multiplicity="*" />
         </Association>
-        <Association Name="UserRole">
-          <End Type="TradersMarketPlaceModel.Role" Role="Role" Multiplicity="*" />
-          <End Type="TradersMarketPlaceModel.User" Role="User" Multiplicity="*" />
-        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -689,14 +638,6 @@
             </EndProperty>
             <EndProperty Name="Menu">
               <ScalarProperty Name="MenuID" ColumnName="MenuID" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="UserRole" TypeName="TradersMarketPlaceModel.UserRole" StoreEntitySet="UserRole">
-            <EndProperty Name="User">
-              <ScalarProperty Name="Username" ColumnName="Username" />
-            </EndProperty>
-            <EndProperty Name="Role">
-              <ScalarProperty Name="RoleID" ColumnName="RoleID" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>

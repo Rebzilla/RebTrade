@@ -5,6 +5,28 @@
 }
 
 <h2>View Users</h2>
+<script type="text/javascript">
+
+    function deleteUser()
+    {
+        var user = { keyword: $('#Username').val() };
+        var param = { username: user };
+
+        $.ajax({
+            url: '@Url.Action("DeleteUserByUsername")',
+            type: "POST",
+            datatype: "json",
+            data: param,
+            error: function (xmlHttpRequest, errorText, thrownError) {
+                alert(xmlHttpRequest + "|" + errorText + "|" + thrownError);
+            },
+            success: function (data) {
+                alert("User has been deleted");
+                window.location = "Users";
+            }
+        });
+    }
+</script>
 
 <table>
     <tr>
@@ -27,7 +49,7 @@
                 @Html.DisplayFor(modelItem => item.RoleName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Username)
+                @Html.DisplayFor(modelItem => item.Username, new { id = "Username" })
             </td>
             <td>
                 @Html.Label("Hidden")
@@ -57,7 +79,7 @@
                 <input type="button" value="Edit User" onclick="location.href='@Url.Action("EditUser", "Users", new { id = item.Username })'" />
             </td>
             <td>
-                <input type="button" value="Delete User" onclick="deleteProduct(@item.Username)" />
+                <input type="button" value="Delete User" onclick="location.href='@Url.Action("DeleteUserByUsername", "Users", new { username = item.Username })'" />
             </td>
         </tr>
     }
