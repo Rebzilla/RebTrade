@@ -9,7 +9,7 @@ using BusinessLayer;
 
 namespace TradersMarketplace.Controllers
 {
-    public class AddUserController : Controller
+    public class AddUserController : MenusController
     {
         //
         // GET: /AddUser/
@@ -20,7 +20,7 @@ namespace TradersMarketplace.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register(UserModel data)
+        public ActionResult Index(UserModel data)
         {
             if (ModelState.IsValid)
             {

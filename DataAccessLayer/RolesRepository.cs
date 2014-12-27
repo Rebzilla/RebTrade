@@ -30,12 +30,9 @@ namespace DataAccessLayer
             return Entity.Roles.SingleOrDefault(r => r.RoleID == roleId);
         }
 
-        public IQueryable<Role> GetAllRoles()
+        public IEnumerable<Role> GetAllRoles()
         {
-            using (TradersMarketPlaceEntities tm = new TradersMarketPlaceEntities())
-            {
-                return tm.Roles;
-            }
+                return Entity.Roles;
         }
 
 
