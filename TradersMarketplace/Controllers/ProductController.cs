@@ -33,23 +33,10 @@ namespace TradersMarketplace.Controllers
 
                     ProductsBL pbl = new ProductsBL();
                     pbl.AddProduct(data.ProductName, HttpContext.User.Identity.Name, data.Description, data.Price, "\\Images\\" + filename, data.StockQty, data.CategoryID);
-                    return RedirectToAction("Index", "Product"); //redirect to view products page
+                    return RedirectToAction("Index", "ViewSellerProduct"); //redirect to view products page
                 }
             }
             return View();
         }
-
-        public ActionResult EditProduct(ProductModel data)
-        {
-            if(ModelState.IsValid)
-            {
-                ProductsBL pbl = new ProductsBL();
-                int catID = pbl.GetCategory(data.CategoryName).CategoryID;
-
-                ViewBag.Message = "Product has been modified successfully";
-            }
-            return View();
-        }
-
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Common;
+using Common.Views;
 
 namespace DataAccessLayer
 {
@@ -72,7 +73,39 @@ namespace DataAccessLayer
             }
         }
 
+        public IQueryable<User> GetAllUsers()
+        {
+            return Entity.Users;
+        }
 
+        public IQueryable<UsersView> GetUsers()
+        {
+            return (
+                from u in Entity.Users
+                join r in Entity.Roles
+                on u.RoleID equals r.RoleID
+
+                select new UsersView
+                {
+                    Username = u.Username,
+                    Password = u.Password,
+                    Name = u.Name,
+                    Surname = u.Surname,
+                    Email = u.Email,
+                    Residence = u.Residence,
+                    Street = u.Street,
+                    Town = u.Town,
+                    Country = u.Country,
+                    RoleName = r.RoleName
+                });
+        }
+
+        public void DeleteUser(User u)
+        {
+            User user = Entity.Users.Find(u.Username);
+            Entity.Users.Remove(user);
+            Entity.SaveChanges();
+        }
 
     }
 }

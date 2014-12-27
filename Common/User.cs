@@ -32,11 +32,13 @@ namespace Common
         public string Street { get; set; }
         public string Town { get; set; }
         public string Country { get; set; }
+        public int RoleID { get; set; }
     
         public virtual ICollection<Cart> Carts { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
         public virtual ICollection<Product> Products { get; set; }
         public virtual ICollection<Product> Products1 { get; set; }
+        public virtual Role Role { get; set; }
         public virtual ICollection<Role> Roles { get; set; }
     }
 }

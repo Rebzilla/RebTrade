@@ -6,20 +6,21 @@ using System.Web.Mvc;
 using TradersMarketplace.Models;
 using BusinessLayer;
 
+
 namespace TradersMarketplace.Controllers
 {
-    public class RegisterController : MenusController
+    public class AddUserController : Controller
     {
         //
-        // GET: /Register/
+        // GET: /AddUser/
 
-        public ActionResult Register()
+        public ActionResult Index()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult Register(RegisterModel data)
+        public ActionResult Register(UserModel data)
         {
             if (ModelState.IsValid)
             {
@@ -40,10 +41,11 @@ namespace TradersMarketplace.Controllers
                     ubl.AddUser(data.Role, data.Username, data.Password, data.Name, data.Surname, data.Email, data.Residence,
                         data.Street, data.Town, data.Country);
 
-                    return RedirectToAction("Login", "Login");
+                    return RedirectToAction("Index", "Users");
                 }
             }
             return View();
         }
+
     }
 }

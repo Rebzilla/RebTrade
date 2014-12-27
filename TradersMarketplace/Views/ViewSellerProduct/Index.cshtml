@@ -43,8 +43,6 @@
     }
 </script>
 
-<div id="divResult">
-</div>
 <table>
     <tr>
         <th>Product Name</th>
@@ -56,7 +54,7 @@
     </tr>
 
     @foreach (var item in Model)
-{
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.ProductName)
@@ -81,8 +79,9 @@
                 <input type="button" value="Edit Product" onclick="location.href='@Url.Action("EditProduct", "ViewSellerProduct", new { id = item.ProductID })'" />
             </td>
             <td>
-                <button type="button" onclick="deleteProduct(@item.ProductID)">Delete Product</button>
+                <input type="button" value ="Delete Product" onclick="deleteProduct(@item.ProductID)"/>
             </td>
         </tr>
-            }
+    }
 </table>
+

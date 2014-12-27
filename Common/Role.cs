@@ -16,14 +16,16 @@ namespace Common
     {
         public Role()
         {
-            this.Menus = new HashSet<Menu>();
             this.Users = new HashSet<User>();
+            this.Menus = new HashSet<Menu>();
+            this.Users1 = new HashSet<User>();
         }
     
         public int RoleID { get; set; }
         public string RoleName { get; set; }
     
-        public virtual ICollection<Menu> Menus { get; set; }
         public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<Menu> Menus { get; set; }
+        public virtual ICollection<User> Users1 { get; set; }
     }
 }

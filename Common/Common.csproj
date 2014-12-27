@@ -89,6 +89,7 @@
     <Compile Include="Views\CartView.cs" />
     <Compile Include="Views\OrdersView.cs" />
     <Compile Include="Views\ProductsView.cs" />
+    <Compile Include="Views\UsersView.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="TradersMarket.edmx">

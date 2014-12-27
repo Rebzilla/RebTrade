@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Common.Views.UsersView>
+@{
+    ViewBag.Title = "View Users";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>View Users</h2>
+
+<table>
+    <tr>
+        <th>User Type</th>
+        <th>Username</th>
+        <th>Password</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Email</th>
+        <th>Residence</th>
+        <th>Street</th>
+        <th>Town</th>
+        <th>Country</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoleName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Username)
+            </td>
+            <td>
+                @Html.Label("Hidden")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Residence)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Street)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Town)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country)
+            </td>
+            <td>
+                <input type="button" value="Edit User" onclick="location.href='@Url.Action("EditUser", "Users", new { id = item.Username })'" />
+            </td>
+            <td>
+                <input type="button" value="Delete User" onclick="deleteProduct(@item.Username)" />
+            </td>
+        </tr>
+    }
+</table>
