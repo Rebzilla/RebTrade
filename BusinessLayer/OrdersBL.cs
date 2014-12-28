@@ -108,5 +108,20 @@ namespace BusinessLayer
            return new OrdersRepository().GetOrderStatuses();
        }
 
+       public void UpdateOrderStatusByOrderID(Guid orderID, int statusID, string buyer, DateTime orderDate)
+       {
+           Order o = new Order();
+           o.OrderID = orderID;
+           o.OrderStatusID = statusID;
+           o.Username = buyer;
+           o.OrderDate = orderDate;
+           new OrdersRepository().UpdateOrderStatusByOrderID(o);
+       }
+
+       public Order GetOrderByID(Guid orderID)
+       {
+           return new OrdersRepository().GetOrderByID(orderID);
+       }
+
     }
 }

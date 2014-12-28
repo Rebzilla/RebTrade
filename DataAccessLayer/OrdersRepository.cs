@@ -81,5 +81,20 @@ namespace DataAccessLayer
             return Entity.OrderStatus;
         }
 
+        public void UpdateOrderStatusByOrderID(Order original)
+        {
+            Order o = Entity.Orders.Where(x => x.OrderID == original.OrderID).SingleOrDefault();
+            o.OrderID = original.OrderID;
+            o.OrderStatusID = original.OrderStatusID;
+            o.Username = original.Username;
+            o.OrderDate = original.OrderDate;
+            Entity.SaveChanges();
+        }
+
+        public Order GetOrderByID(Guid orderID)
+        {
+            return Entity.Orders.Where(o => o.OrderID == orderID).SingleOrDefault();
+        }
+
     }
 }

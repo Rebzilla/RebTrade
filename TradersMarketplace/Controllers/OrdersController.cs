@@ -44,18 +44,21 @@ namespace TradersMarketplace.Controllers
             return View(orderDetails);
         }
 
-        public ActionResult EditOrder()
+        public ActionResult EditOrder(Guid id)
         {
-            //update the status
-            return View();
+           // new OrdersBL().UpdateOrderStatusByOrderID(id, statusID, buyer, orderDate);
+            List<OrdersView> orders = (List<OrdersView>)new OrdersBL().GetOrdersForSeller(HttpContext.User.Identity.Name).ToList();
+            return View("Index", orders);
         }
 
-        //Delete Method here
-        public ActionResult DeleteOrder()
+        public ActionResult DeleteOrder(Guid id)
         {
-            //set status to complete
-            return View();
+            Order o = new OrdersBL().GetOrderByID(id);
+            new OrdersBL().UpdateOrderStatusByOrderID(o.OrderID, 3, o.Username, o.OrderDate); //set status to complete //3
+            List<OrdersView> orders = (List<OrdersView>)new OrdersBL().GetOrdersForSeller(HttpContext.User.Identity.Name).ToList();
+            return View("Index", orders);
         }
 
+        
     }
 }
