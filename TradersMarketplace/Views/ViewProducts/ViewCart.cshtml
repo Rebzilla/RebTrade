@@ -53,6 +53,9 @@
                         €@(item.ProductQuantity * item.ProductPrice)
                     </td>
                     <td>
+                        <input type="button" value="Edit Details" onclick="location.href='@Url.Action("EditDetails", "ViewProducts", new { id = item.ProductID })'" />
+                    </td>
+                    <td>
                         <input type="button" value="Remove Product" onclick="removeProduct(@item.ProductID)" />
                     </td>
                 </tr>

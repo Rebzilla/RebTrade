@@ -314,6 +314,7 @@
     <Content Include="Views\Users\EditUser.cshtml" />
     <Content Include="Views\ViewProducts\Index.cshtml" />
     <Content Include="Views\ViewProducts\ViewCart.cshtml" />
+    <Content Include="Views\ViewProducts\EditDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

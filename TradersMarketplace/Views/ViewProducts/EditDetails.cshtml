@@ -1,0 +1,46 @@
+﻿@model Common.Views.CartView
+@{
+    ViewBag.Title = "Edit Shopping Cart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit Shopping Cart</h2>
+
+@using (Html.BeginForm("EditDetails", "ViewProducts", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.ProductID)
+
+    <div>
+        @Html.LabelFor(model => model.ProductName, "Product Name")
+        @Html.Raw(Model.ProductName)
+    </div>
+
+    <br />
+    <div>
+        @Html.Label("Image") <br />
+        <img src="@Model.ProductImage" width="100" height="100" alt="image" /><br />
+    </div>
+
+    <br />
+    <div>
+        @Html.LabelFor(model => model.ProductQuantity, "Quantity")
+        @Html.EditorFor(model => model.ProductQuantity)
+    </div>
+
+    <br />
+    <div>
+        @Html.LabelFor(model => model.ProductPrice, "Total Price")
+        €@Html.Raw(Model.ProductPrice * Model.ProductQuantity)
+    </div>
+
+    <br />
+    <div>
+        <input type="submit" value="Save" />
+    </div>
+}
+<div>
+    @Html.ActionLink("Back to Shopping Cart", "ViewCart")
+</div>

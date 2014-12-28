@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TradersMarketplace.Models;
@@ -14,6 +16,7 @@ namespace TradersMarketplace.Controllers
     {
         //
         // GET: /ViewProducts/
+        public TradersMarketPlaceEntities db = new TradersMarketPlaceEntities();
 
         [Authorize]
         public ActionResult Index()
@@ -50,6 +53,34 @@ namespace TradersMarketplace.Controllers
         public void RemoveFromCart(int pID)
         {
             new ProductsBL().RemoveFromCart(pID, HttpContext.User.Identity.Name);
+        }
+
+        public ActionResult EditDetails(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Product p = db.Products.Find(id);
+            CartView cv = new ProductsBL().GetCartDetails(HttpContext.User.Identity.Name, p.ProductID);
+
+            return View(cv);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditDetails([Bind(Include = "ProductID,ProductName,ProductQuantity,ProductPrice")] CartView cart)
+        {
+            Cart c = db.Carts.Find(HttpContext.User.Identity.Name, cart.ProductID);
+            c.Quantity = cart.ProductQuantity;
+
+            if (ModelState.IsValid)
+            {
+                db.Entry(c).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("ViewCart");
+            }
+            return View(c);
         }
     }
 }
