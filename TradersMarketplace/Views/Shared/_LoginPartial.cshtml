@@ -7,8 +7,8 @@
         }
     </text>*@
     <text>Welcome <strong>@User.Identity.Name</strong>!
-    [ @Html.ActionLink("Sign Out", "LogOff", "Login") ]</text> <br /> <br/>
-        @:[ @Html.ActionLink("Check Out", "ViewCart", "Products") ]
+    [@Html.ActionLink("Sign Out", "LogOff", "Login")]</text> <br /> <br/>
+        @:[@Html.ActionLink("Check Out", "ViewCart", "ViewProducts")]
 } else {
     <ul>
         <li>@Html.ActionLink("Register", "Register", "Register", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>

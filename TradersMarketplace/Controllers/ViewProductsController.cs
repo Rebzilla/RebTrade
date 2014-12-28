@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Common;
+using TradersMarketplace.Models;
 using BusinessLayer;
+using Common;
 using Common.Views;
 
 namespace TradersMarketplace.Controllers
@@ -26,6 +27,23 @@ namespace TradersMarketplace.Controllers
         {
             string value = new ProductsBL().AddToCart(HttpContext.User.Identity.Name, pId, quantity);
             return value;
+        }
+
+        [Authorize]
+        public ActionResult ViewCart()
+        {
+            ProductsModel pm = new ProductsModel(HttpContext.User.Identity.Name);
+            List<CartView> products = pm.ProductsList;
+
+            decimal totalPrice = 0;
+
+            foreach (CartView p in products)
+            {
+                totalPrice += (p.ProductPrice * p.ProductQuantity);
+            }
+
+            ViewBag.TotalPrice = totalPrice;
+            return View("ViewCart", products);
         }
     }
 }
