@@ -17,10 +17,8 @@ namespace Common
         public System.Guid OrderID { get; set; }
         public int ProductID { get; set; }
         public int ProductQty { get; set; }
-        public int OrderStatusID { get; set; }
     
         public virtual Order Order { get; set; }
-        public virtual OrderStatu OrderStatu { get; set; }
         public virtual Product Product { get; set; }
     }
 }

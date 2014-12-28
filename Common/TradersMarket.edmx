@@ -39,6 +39,7 @@
           <Property Name="OrderID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="OrderDate" Type="date" Nullable="false" />
+          <Property Name="OrderStatusID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="OrderDetails">
           <Key>
@@ -48,7 +49,6 @@
           <Property Name="OrderID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="ProductID" Type="int" Nullable="false" />
           <Property Name="ProductQty" Type="int" Nullable="false" />
-          <Property Name="OrderStatusID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="OrderStatus">
           <Key>
@@ -147,6 +147,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Order_OrderStatus">
+          <End Role="OrderStatus" Type="Self.OrderStatus" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderStatus">
+              <PropertyRef Name="StatusID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="OrderStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Order_User">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="Order" Type="Self.Order" Multiplicity="*" />
@@ -168,18 +180,6 @@
             </Principal>
             <Dependent Role="OrderDetails">
               <PropertyRef Name="OrderID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OrderDetails_OrderStatus">
-          <End Role="OrderStatus" Type="Self.OrderStatus" Multiplicity="1" />
-          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="OrderStatus">
-              <PropertyRef Name="StatusID" />
-            </Principal>
-            <Dependent Role="OrderDetails">
-              <PropertyRef Name="OrderStatusID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -270,16 +270,16 @@
             <End Role="Role" EntitySet="Role" />
             <End Role="MenuRoles" EntitySet="MenuRoles" />
           </AssociationSet>
+          <AssociationSet Name="FK_Order_OrderStatus" Association="Self.FK_Order_OrderStatus">
+            <End Role="OrderStatus" EntitySet="OrderStatus" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
           <AssociationSet Name="FK_Order_User" Association="Self.FK_Order_User">
             <End Role="User" EntitySet="User" />
             <End Role="Order" EntitySet="Order" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderDetails_Order" Association="Self.FK_OrderDetails_Order">
             <End Role="Order" EntitySet="Order" />
-            <End Role="OrderDetails" EntitySet="OrderDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderDetails_OrderStatus" Association="Self.FK_OrderDetails_OrderStatus">
-            <End Role="OrderStatus" EntitySet="OrderStatus" />
             <End Role="OrderDetails" EntitySet="OrderDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderDetails_Product" Association="Self.FK_OrderDetails_Product">
@@ -325,16 +325,16 @@
             <End Role="User" EntitySet="Users" />
             <End Role="Cart" EntitySet="Carts" />
           </AssociationSet>
+          <AssociationSet Name="FK_Order_OrderStatus" Association="TradersMarketPlaceModel.FK_Order_OrderStatus">
+            <End Role="OrderStatu" EntitySet="OrderStatus" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
           <AssociationSet Name="FK_Order_User" Association="TradersMarketPlaceModel.FK_Order_User">
             <End Role="User" EntitySet="Users" />
             <End Role="Order" EntitySet="Orders" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderDetails_Order" Association="TradersMarketPlaceModel.FK_OrderDetails_Order">
             <End Role="Order" EntitySet="Orders" />
-            <End Role="OrderDetail" EntitySet="OrderDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderDetails_OrderStatus" Association="TradersMarketPlaceModel.FK_OrderDetails_OrderStatus">
-            <End Role="OrderStatu" EntitySet="OrderStatus" />
             <End Role="OrderDetail" EntitySet="OrderDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderDetails_Product" Association="TradersMarketPlaceModel.FK_OrderDetails_Product">
@@ -391,6 +391,8 @@
           <Property Name="OrderID" Type="Guid" Nullable="false" />
           <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="OrderStatusID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="OrderStatu" Relationship="TradersMarketPlaceModel.FK_Order_OrderStatus" FromRole="Order" ToRole="OrderStatu" />
           <NavigationProperty Name="User" Relationship="TradersMarketPlaceModel.FK_Order_User" FromRole="Order" ToRole="User" />
           <NavigationProperty Name="OrderDetails" Relationship="TradersMarketPlaceModel.FK_OrderDetails_Order" FromRole="Order" ToRole="OrderDetail" />
         </EntityType>
@@ -402,9 +404,7 @@
           <Property Name="OrderID" Type="Guid" Nullable="false" />
           <Property Name="ProductID" Type="Int32" Nullable="false" />
           <Property Name="ProductQty" Type="Int32" Nullable="false" />
-          <Property Name="OrderStatusID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Order" Relationship="TradersMarketPlaceModel.FK_OrderDetails_Order" FromRole="OrderDetail" ToRole="Order" />
-          <NavigationProperty Name="OrderStatu" Relationship="TradersMarketPlaceModel.FK_OrderDetails_OrderStatus" FromRole="OrderDetail" ToRole="OrderStatu" />
           <NavigationProperty Name="Product" Relationship="TradersMarketPlaceModel.FK_OrderDetails_Product" FromRole="OrderDetail" ToRole="Product" />
         </EntityType>
         <EntityType Name="OrderStatu">
@@ -413,7 +413,7 @@
           </Key>
           <Property Name="StatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="OrderDetails" Relationship="TradersMarketPlaceModel.FK_OrderDetails_OrderStatus" FromRole="OrderStatu" ToRole="OrderDetail" />
+          <NavigationProperty Name="Orders" Relationship="TradersMarketPlaceModel.FK_Order_OrderStatus" FromRole="OrderStatu" ToRole="Order" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -494,6 +494,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Order_OrderStatus">
+          <End Type="TradersMarketPlaceModel.OrderStatu" Role="OrderStatu" Multiplicity="1" />
+          <End Type="TradersMarketPlaceModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderStatu">
+              <PropertyRef Name="StatusID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="OrderStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Order_User">
           <End Type="TradersMarketPlaceModel.User" Role="User" Multiplicity="1" />
           <End Type="TradersMarketPlaceModel.Order" Role="Order" Multiplicity="*" />
@@ -515,18 +527,6 @@
             </Principal>
             <Dependent Role="OrderDetail">
               <PropertyRef Name="OrderID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OrderDetails_OrderStatus">
-          <End Type="TradersMarketPlaceModel.OrderStatu" Role="OrderStatu" Multiplicity="1" />
-          <End Type="TradersMarketPlaceModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="OrderStatu">
-              <PropertyRef Name="StatusID" />
-            </Principal>
-            <Dependent Role="OrderDetail">
-              <PropertyRef Name="OrderStatusID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -623,6 +623,7 @@
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="TradersMarketPlaceModel.Order">
               <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="OrderStatusID" ColumnName="OrderStatusID" />
                 <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="OrderID" ColumnName="OrderID" />
@@ -632,7 +633,6 @@
           <EntitySetMapping Name="OrderDetails">
             <EntityTypeMapping TypeName="TradersMarketPlaceModel.OrderDetail">
               <MappingFragment StoreEntitySet="OrderDetails">
-                <ScalarProperty Name="OrderStatusID" ColumnName="OrderStatusID" />
                 <ScalarProperty Name="ProductQty" ColumnName="ProductQty" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="OrderID" ColumnName="OrderID" />

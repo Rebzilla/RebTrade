@@ -22,7 +22,9 @@ namespace Common
         public System.Guid OrderID { get; set; }
         public string Username { get; set; }
         public System.DateTime OrderDate { get; set; }
+        public int OrderStatusID { get; set; }
     
+        public virtual OrderStatu OrderStatu { get; set; }
         public virtual User User { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }

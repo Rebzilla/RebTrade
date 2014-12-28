@@ -25,6 +25,7 @@ namespace BusinessLayer
            o.OrderID = orderID;
            o.Username = username;
            o.OrderDate = DateTime.Now;
+           o.OrderStatusID = 1; //Paid Status
 
            OrderDetail od;
            decimal totalPrice = 0M;
@@ -41,8 +42,7 @@ namespace BusinessLayer
                    od.OrderID = orderID;
                    od.ProductID = p.ProductID;
                    od.ProductQty = p.ProductQuantity;
-                   od.OrderStatusID = 1; //Paid Status
-
+                   
                    totalPrice += (p.ProductPrice * p.ProductQuantity);
 
                    or.AddOrderDetails(od);
@@ -92,5 +92,21 @@ namespace BusinessLayer
                or.Entity.Database.Connection.Close();
            }
        }
+
+       public IQueryable<OrdersView> GetOrdersForSeller(string seller)
+       {
+           return new OrdersRepository().GetOrdersForSeller(seller);
+       }
+
+       public IQueryable<OrdersView> GetOrderDetails(Guid orderID, string seller)
+       {
+           return new OrdersRepository().GetOrderDetails(orderID, seller);
+       }
+
+       public IEnumerable<OrderStatu> GetOrderStatuses()
+       {
+           return new OrdersRepository().GetOrderStatuses();
+       }
+
     }
 }

@@ -29,5 +29,57 @@ namespace DataAccessLayer
                 tm.SaveChanges();
             }
         }
+
+        public IQueryable<OrdersView> GetOrdersForSeller(string seller)
+        {
+            return (
+                from p in Entity.Products
+                join od in Entity.OrderDetails
+                on p.ProductID equals od.ProductID
+                join o in Entity.Orders
+                on od.OrderID equals o.OrderID
+                join os in Entity.OrderStatus
+                on o.OrderStatusID equals os.StatusID
+
+                where p.SellerUsername == seller
+
+                select new OrdersView
+                {
+                    OrderID = o.OrderID,
+                    OrderDate = o.OrderDate,
+                    Buyer = o.Username,
+                    OrderStatusID = o.OrderStatusID,
+                    OrderStatus = os.Status
+                }).Distinct();
+        }
+
+        public IQueryable<OrdersView> GetOrderDetails(Guid orderID, string seller)
+        {
+            return (
+                from p in Entity.Products
+                join od in Entity.OrderDetails
+                on p.ProductID equals od.ProductID
+                join o in Entity.Orders
+                on od.OrderID equals o.OrderID
+
+                where o.OrderID == orderID
+                && p.SellerUsername == seller
+
+                select new OrdersView
+                {
+                    OrderID = orderID,
+                    ProductID = p.ProductID,
+                    ProductName = p.ProductName,
+                    Quantity = od.ProductQty,
+                    ImageLink = p.ImageLink,
+                    Price = Math.Round(p.Price * od.ProductQty, 2),
+                });
+        }
+
+        public IEnumerable<OrderStatu> GetOrderStatuses()
+        {
+            return Entity.OrderStatus;
+        }
+
     }
 }

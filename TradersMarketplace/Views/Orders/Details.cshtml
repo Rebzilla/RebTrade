@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "View Order Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>View Order Details</h2>
+
+@model IEnumerable<Common.Views.OrdersView>
+
+@{
+    ViewBag.Title = "Trader's Marketplace | View Order Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>View Order Details</h2>
+<h3>Order ID: @ViewBag.OrderID</h3>
+<table>
+    <tr>
+        <th>Product Name</th>
+        <th>Image</th>
+        <th>Quantity</th>
+        <th>Price</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                <img height="150" width="150" src="@Url.Content(item.ImageLink)" alt="@Html.DisplayFor(modelItem => item.ImageLink)" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                €@Html.DisplayFor(modelItem => item.Price)
+            </td>
+        </tr>
+    }
+</table>
+<h3>@ViewBag.TotalPrice</h3> <br />
+
+<div>
+    @Html.ActionLink("Back to Orders List", "Index")
+</div>

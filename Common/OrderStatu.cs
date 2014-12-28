@@ -16,12 +16,12 @@ namespace Common
     {
         public OrderStatu()
         {
-            this.OrderDetails = new HashSet<OrderDetail>();
+            this.Orders = new HashSet<Order>();
         }
     
         public int StatusID { get; set; }
         public string Status { get; set; }
     
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }
