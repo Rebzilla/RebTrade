@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MenusBL.cs" />
+    <Compile Include="OrdersBL.cs" />
     <Compile Include="ProductsBL.cs" />
     <Compile Include="RolesBL.cs" />
     <Compile Include="UsersBL.cs" />

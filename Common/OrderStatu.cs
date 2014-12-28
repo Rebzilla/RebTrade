@@ -12,15 +12,16 @@ namespace Common
     using System;
     using System.Collections.Generic;
     
-    public partial class OrderDetail
+    public partial class OrderStatu
     {
-        public System.Guid OrderID { get; set; }
-        public int ProductID { get; set; }
-        public int ProductQty { get; set; }
-        public int OrderStatusID { get; set; }
+        public OrderStatu()
+        {
+            this.OrderDetails = new HashSet<OrderDetail>();
+        }
     
-        public virtual Order Order { get; set; }
-        public virtual OrderStatu OrderStatu { get; set; }
-        public virtual Product Product { get; set; }
+        public int StatusID { get; set; }
+        public string Status { get; set; }
+    
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

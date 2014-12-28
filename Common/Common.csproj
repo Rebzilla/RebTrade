@@ -58,6 +58,9 @@
     <Compile Include="OrderDetail.cs">
       <DependentUpon>TradersMarket.tt</DependentUpon>
     </Compile>
+    <Compile Include="OrderStatu.cs">
+      <DependentUpon>TradersMarket.tt</DependentUpon>
+    </Compile>
     <Compile Include="Product.cs">
       <DependentUpon>TradersMarket.tt</DependentUpon>
     </Compile>

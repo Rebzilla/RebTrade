@@ -107,5 +107,14 @@ namespace DataAccessLayer
             Entity.SaveChanges();
         }
 
+        public string GetAdminEmail()
+        {
+            return (
+                from u in Entity.Users
+                where u.RoleID == 4
+                select u.Email
+                ).FirstOrDefault();
+        }
+
     }
 }

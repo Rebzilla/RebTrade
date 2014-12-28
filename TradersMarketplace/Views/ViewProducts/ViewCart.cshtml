@@ -6,9 +6,8 @@
 
 <h2>View Shopping Cart</h2>
 <script type="text/javascript">
-    function removeProduct(id)
-    {
-        var param = {pID: id}
+    function removeProduct(id) {
+        var param = { pID: id }
         $.ajax({
             url: '@Url.Action("RemoveFromCart")',
             type: "POST",
@@ -24,10 +23,16 @@
         });
     }
 </script>
-@using (Html.BeginForm())
+
+@ViewBag.Message
+
+@if (Model == null || Model.Count() == 0)
 {
-    @ViewBag.Message
-    if (Model.Count() > 0)
+    <div style="color: Red"><b>Your shopping cart is empty!</b></div>
+}
+else
+{
+    using (Html.BeginForm())
     {
         <table>
             <tr>
@@ -73,9 +78,5 @@
                 <td><input type="submit" name="ViewCart" value="Checkout" /></td>
             </tr>
         </table>
-    }
-    else
-    {
-        <div style="color: Red"><b>Your shopping cart is empty!</b></div>
     }
 }
