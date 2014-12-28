@@ -19,7 +19,6 @@ namespace TradersMarketplace.Controllers
         [Authorize]
         public ActionResult Index()
         {
-           // List<User> users = new UsersBL().GetAllUsers().ToList();
             List<UsersView> users = new UsersBL().GetUsers().ToList();
             return View("Index", users);
         }

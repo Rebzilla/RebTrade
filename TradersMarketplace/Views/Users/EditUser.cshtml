@@ -6,6 +6,13 @@
 
 <h2>Edit User</h2>
 
+<script language="javascript">
+    $(document).ready(function () {
+        var c = $('#countryname').val();
+        $('#Country').val(c);
+    });
+</script>
+
 @using (Html.BeginForm("EditUser", "Users", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
@@ -67,7 +74,9 @@
         @Html.ValidationMessageFor(model => model.Town)
     </div>
     <br />
-
+    <span style="visibility:hidden; display:none">
+        @Html.TextBoxFor(model => model.Country, new { id = "countryname" })
+    </span>
     <div>
         @Html.LabelFor(model => model.Country)
         <select name="Country">

@@ -21,5 +21,11 @@ namespace TradersMarketplace.Controllers
             return View(products);
         }
 
+        [Authorize]
+        public string AddToCart(int pId, int quantity)
+        {
+            string value = new ProductsBL().AddToCart(HttpContext.User.Identity.Name, pId, quantity);
+            return value;
+        }
     }
 }

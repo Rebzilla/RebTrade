@@ -5,9 +5,52 @@
 }
 
 <h2>View Products</h2>
-
 <script type="text/javascript">
+    function addtocart(id, counter) {
+        var qty = $("#quantity" + counter + "").val();
+        var validate = new RegExp('^[0-9]$', "");
 
+        if (qty == "") {
+            alert("Input quantity to buy!");
+        }
+        else if ((qty == "0") || (parseInt(qty) < 0)) {
+            alert("Quantity should be more than 0!");
+        }
+        else if (isNaN(qty)) {
+            alert("Only digits are accepted");
+        }
+        else if (!validate.test(qty)) {
+            alert("Invalid quantity");
+        }
+        else {
+            var param = {
+                pId: id,
+                quantity: qty
+            };
+            $.ajax({
+                url: '@Url.Action("AddToCart")',
+                type: "POST",
+                datatype: "json",
+                data: param,
+                error: function (xmlHttpRequest, errorText, thrownError) {
+                    alert(xmlHttpRequest + "|" + errorText + "|" + thrownError);
+                },
+                success: function (data) {
+                    var msg = data.hasOwnProperty("not enough stock") ? data.d : data;
+                    if (data != null) {
+                        if (data == "not enough stock") {
+                            alert("Not enough product stock! Try a lower quantity");
+                            $('#quantity' + counter + '').val("");
+                        }
+                        else {
+                            alert("Product has been successfully added to your cart!");
+                            $('#quantity' + counter + '').val("");
+                        }
+                    }
+                }
+            });
+        }
+    }
 </script>
 
 <table>
@@ -18,7 +61,11 @@
         <th>Image</th>
         <th>Stock Quantity</th>
         <th>Category</th>
+        <th>Add to Cart</th>
     </tr>
+    @{
+        int counter = 1;
+    }
 
     @foreach (var item in Model)
     {
@@ -41,6 +88,23 @@
             <td>
                 @Html.DisplayFor(modelItem => item.CategoryName)
             </td>
+            <td>
+                <div id='@counter'></div>
+                @if (item.StockQty != 0)
+                {
+                    @Html.Label("Quantity:") <br />
+                    @Html.TextBox("quantity" + counter + "")
+
+                    <button type="button" onclick="addtocart(@item.ProductID, @counter)">Add to Cart</button>
+                }
+                else
+                {
+                    <span style="color:Red">
+                        @Html.Label("Product is out of stock!")
+                    </span>
+                }
+            </td>
         </tr>
+                { counter++; }
     }
 </table>
