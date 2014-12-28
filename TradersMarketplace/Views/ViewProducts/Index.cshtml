@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Common.Views.ProductsView>
+@{
+    ViewBag.Title = "View Products";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>View Products</h2>
+
+<script type="text/javascript">
+
+</script>
+
+<table>
+    <tr>
+        <th>Product Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Image</th>
+        <th>Stock Quantity</th>
+        <th>Category</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                €@Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                <img height="150" width="150" src="@Url.Content(item.Image)" alt="@Html.DisplayFor(modelItem => item.Image)" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StockQty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+        </tr>
+    }
+</table>
