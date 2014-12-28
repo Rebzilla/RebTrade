@@ -5,7 +5,25 @@
 }
 
 <h2>View Shopping Cart</h2>
-
+<script type="text/javascript">
+    function removeProduct(id)
+    {
+        var param = {pID: id}
+        $.ajax({
+            url: '@Url.Action("RemoveFromCart")',
+            type: "POST",
+            datatype: "json",
+            data: param,
+            error: function (xmlHttpRequest, errorText, thrownError) {
+                alert(xmlHttpRequest + "|" + errorText + "|" + thrownError);
+            },
+            success: function (data) {
+                alert("Product has been removed from cart");
+                window.location = "ViewCart";
+            }
+        });
+    }
+</script>
 @using (Html.BeginForm())
 {
     @ViewBag.Message
@@ -33,6 +51,9 @@
                     </td>
                     <td>
                         €@(item.ProductQuantity * item.ProductPrice)
+                    </td>
+                    <td>
+                        <input type="button" value="Remove Product" onclick="removeProduct(@item.ProductID)" />
                     </td>
                 </tr>
             }

@@ -45,5 +45,11 @@ namespace TradersMarketplace.Controllers
             ViewBag.TotalPrice = totalPrice;
             return View("ViewCart", products);
         }
+
+        [Authorize]
+        public void RemoveFromCart(int pID)
+        {
+            new ProductsBL().RemoveFromCart(pID, HttpContext.User.Identity.Name);
+        }
     }
 }
