@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLayer", "BusinessLa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{67CB1102-6F8F-4BAA-8964-3AE0C640C66A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradersMarketplaceTestProject", "TradersMarketplaceTestProject\TradersMarketplaceTestProject.csproj", "{C8A0E573-EBC1-4A4C-AD5C-DCBC69B98605}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{67CB1102-6F8F-4BAA-8964-3AE0C640C66A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67CB1102-6F8F-4BAA-8964-3AE0C640C66A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67CB1102-6F8F-4BAA-8964-3AE0C640C66A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8A0E573-EBC1-4A4C-AD5C-DCBC69B98605}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8A0E573-EBC1-4A4C-AD5C-DCBC69B98605}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8A0E573-EBC1-4A4C-AD5C-DCBC69B98605}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8A0E573-EBC1-4A4C-AD5C-DCBC69B98605}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

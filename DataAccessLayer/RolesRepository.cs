@@ -24,6 +24,13 @@ namespace DataAccessLayer
             Entity.SaveChanges();
         }
 
+        public void UpdateRole(Role or)
+        {
+            Role r = Entity.Roles.SingleOrDefault(x => x.RoleID == or.RoleID);
+            r.RoleName = or.RoleName;
+            Entity.SaveChanges();
+        }
+
         public Role GetRoleByRoleName(string roleName)
         {
             using(TradersMarketPlaceEntities tm = new TradersMarketPlaceEntities())

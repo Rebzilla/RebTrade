@@ -48,8 +48,7 @@ namespace TradersMarketplace.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(role).State = EntityState.Modified;
-                db.SaveChanges();
+                new RolesBL().UpdateRole(role.RoleID, role.RoleName);
                 return RedirectToAction("Index");
             }
             return View(role);
