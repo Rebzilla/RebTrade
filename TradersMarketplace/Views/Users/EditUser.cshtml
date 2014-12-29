@@ -74,9 +74,6 @@
         @Html.ValidationMessageFor(model => model.Town)
     </div>
     <br />
-    <span style="visibility:hidden; display:none">
-        @Html.TextBoxFor(model => model.Country, new { id = "countryname" })
-    </span>
     <div>
         @Html.LabelFor(model => model.Country)
         <select name="Country" id="Country">
@@ -332,7 +329,9 @@
         </select>
         @Html.ValidationMessageFor(model => model.Country)
     </div>
-
+    <span style="visibility:hidden; display:none">
+            @Html.TextBoxFor(model => model.Country, new { id = "countryname" })
+        </span>
     <div>
         @Html.Label("User Type")
         @Html.DropDownListFor(model => model.RoleID, (IEnumerable<SelectListItem>)ViewData["usersList"], "--Select User Type--")
