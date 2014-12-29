@@ -83,8 +83,6 @@ namespace TradersMarketplace.Controllers
             return View(c);
         }
 
-        //[HttpPost]
-        //public ActionResult ViewCart(ProductsModel data)
         public ActionResult AddOrder()
         {
             List<CartView> products = (List<CartView>)new ProductsBL().GetProductsInShoppingCart(HttpContext.User.Identity.Name).ToList();
@@ -92,8 +90,6 @@ namespace TradersMarketplace.Controllers
             {
                 if (products.Count() != 0)
                 {
-                    //data.OrderID = Guid.NewGuid();
-                    //new OrdersBL().PlaceOrder(HttpContext.User.Identity.Name, data.OrderID, products);
                     Guid OrderID = Guid.NewGuid();
                     new OrdersBL().PlaceOrder(HttpContext.User.Identity.Name, OrderID, products);
                     

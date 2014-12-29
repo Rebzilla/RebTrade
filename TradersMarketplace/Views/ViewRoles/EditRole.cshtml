@@ -1,0 +1,31 @@
+﻿@model Common.Role
+@{
+    ViewBag.Title = "Edit Role";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit Role</h2>
+
+@using (Html.BeginForm("EditRole", "ViewRoles", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.RoleID)
+    <div>
+        @Html.LabelFor(model => model.RoleID, "Role ID")
+        @Html.Raw(Model.RoleID)
+    </div>
+    <br />
+
+    <div>
+        @Html.LabelFor(model => model.RoleName, "Role Name")
+        @Html.EditorFor(model => model.RoleName)
+    </div>
+    <div>
+        <input type="submit" value="Save" />
+    </div>
+}
+<div>
+    @Html.ActionLink("Back to View Roles", "Index")
+</div>

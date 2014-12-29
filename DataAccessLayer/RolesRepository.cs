@@ -11,6 +11,19 @@ namespace DataAccessLayer
     {
         public RolesRepository() : base() { }
 
+        public void AddRole(Role r)
+        {
+            Entity.Roles.Add(r);
+            Entity.SaveChanges();
+        }
+
+        public void DeleteRole(Role r)
+        {
+            Role ro = Entity.Roles.Find(r.RoleID);
+            Entity.Roles.Remove(ro);
+            Entity.SaveChanges();
+        }
+
         public Role GetRoleByRoleName(string roleName)
         {
             using(TradersMarketPlaceEntities tm = new TradersMarketPlaceEntities())

@@ -183,6 +183,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AddRoleController.cs" />
     <Compile Include="Controllers\AddUserController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -192,6 +193,7 @@
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\ViewProductsController.cs" />
+    <Compile Include="Controllers\ViewRolesController.cs" />
     <Compile Include="Controllers\ViewSellerProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -200,6 +202,7 @@
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\ProductsModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
+    <Compile Include="Models\RoleModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -322,6 +325,9 @@
     <Content Include="Views\ViewProducts\EditDetails.cshtml" />
     <Content Include="Views\Orders\Index.cshtml" />
     <Content Include="Views\Orders\Details.cshtml" />
+    <Content Include="Views\AddRole\Index.cshtml" />
+    <Content Include="Views\ViewRoles\Index.cshtml" />
+    <Content Include="Views\ViewRoles\EditRole.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
