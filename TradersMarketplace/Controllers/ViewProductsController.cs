@@ -83,16 +83,20 @@ namespace TradersMarketplace.Controllers
             return View(c);
         }
 
-        [HttpPost]
-        public ActionResult ViewCart(ProductsModel data)
+        //[HttpPost]
+        //public ActionResult ViewCart(ProductsModel data)
+        public ActionResult AddOrder()
         {
             List<CartView> products = (List<CartView>)new ProductsBL().GetProductsInShoppingCart(HttpContext.User.Identity.Name).ToList();
             try
             {
                 if (products.Count() != 0)
                 {
-                    data.OrderID = Guid.NewGuid();
-                    new OrdersBL().PlaceOrder(HttpContext.User.Identity.Name, data.OrderID, products);
+                    //data.OrderID = Guid.NewGuid();
+                    //new OrdersBL().PlaceOrder(HttpContext.User.Identity.Name, data.OrderID, products);
+                    Guid OrderID = Guid.NewGuid();
+                    new OrdersBL().PlaceOrder(HttpContext.User.Identity.Name, OrderID, products);
+                    
                     ViewBag.Message = "Your order has been successfully placed!";
                     return View("ViewCart", null);
                 }

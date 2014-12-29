@@ -43,6 +43,7 @@ else
             <th>Order ID</th>
             <th>Order Date</th>
             <th>Buyer</th>
+            <th>Current Order Status</th>
             <th>Order Status</th>
         </tr>
 
@@ -62,6 +63,9 @@ else
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Buyer)
+                </td>
+                <td>
+                    <div style="font-weight: bold">@Html.DisplayFor(modelItem => item.OrderStatus)</div>
                 </td>
                 <td>
                     @if(item.OrderStatusID == 3)

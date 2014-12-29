@@ -64,8 +64,8 @@ namespace BusinessLayer
                    mm.From = new MailAddress("fabulousfashion00@gmail.com", "Trader's Marketplace");
                    mm.Subject = "Order Commission";
                    mm.Body = "Dear Admin, <br/><br/>An order with ID " + orderID + " has been placed.<br/>";
-                   mm.Body += "You have received 10% of the order total as a commission: <br/>";
-                   mm.Body += "&#8364;" + Math.Round(commission * (totalPrice), 2);
+                   mm.Body += "You have received 10% of the order total as a commission: &#8364;"+Math.Round(commission * (totalPrice), 2);
+                   mm.Body += "<br/><br/>Regards, <br/>Traders MarketPlace";
                    mm.IsBodyHtml = true;
 
                    SmtpClient client = new SmtpClient("smtp.gmail.com", 587);

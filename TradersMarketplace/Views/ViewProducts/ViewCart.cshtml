@@ -22,6 +22,36 @@
             }
         });
     }
+
+    function placeOrder() {
+        //verify the textbox
+        var visa = $("#visacard").val();
+        var validate = new RegExp('^4[0-9]{12}(?:[0-9]{3})?', "");
+        if (visa == "") {
+            alert("Input visa card number");
+        }
+        else if (!validate.test(visa))
+        {
+            alert("Incorrect visa card format. Visa must start with number 4 and be 16 digits long");
+        }
+        else
+        {
+            $.ajax({
+                url: '@Url.Action("AddOrder")',
+                type: "POST",
+                datatype: "json",
+                data: null,
+                error: function (xmlHttpRequest, errorText, thrownError) {
+                    alert(xmlHttpRequest + "|" + errorText + "|" + thrownError);
+                },
+                success: function (data) {
+                    alert("Your order has been successfully placed");
+                    window.location = "ViewCart";
+                }
+            });
+        }
+    }
+
 </script>
 
 @ViewBag.Message
@@ -75,7 +105,17 @@ else
                 <td></td>
                 <td></td>
                 <td></td>
-                <td><input type="submit" name="ViewCart" value="Checkout" /></td>
+                <td>
+                    @Html.Label("Visa Card Number:") <br />
+                    @Html.TextBox("visacard")    
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><button type="button" onclick="placeOrder()">Checkout</button></td>
+                @*<td><input type="submit" name="ViewCart" value="Checkout" /></td>*@
             </tr>
         </table>
     }
