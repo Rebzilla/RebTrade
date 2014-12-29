@@ -5,10 +5,36 @@
 }
 
 <h2>View Orders</h2>
+<script type="text/javascript">
+
+    function updateStatus(inc) {
+        if ($("#ddlStatus" + inc + "").val() == "") {
+            alert("Choose an Order Status to update the Order!");
+        }
+        else {
+            var orid = $("#oID"+inc+"").val();
+            var status = $('#ddlStatus' + inc + ' option:selected').val();
+            var param = { OrderID: orid, statusID: status };
+            $.ajax({
+                url: '@Url.Action("UpdateOrderStatus")',
+                type: "POST",
+                datatype: "json",
+                data: param,
+                error: function (xmlHttpRequest, errorText, thrownError) {
+                    alert(xmlHttpRequest + "|" + errorText + "|" + thrownError);
+                },
+                success: function (data) {
+                    alert("Order Status has been updated!");
+                }
+            });
+        }
+    }
+
+</script>
 
 @if (Model == null || Model.Count() == 0)
 {
-    <div style="color: Red"><b>No orders found</b></div>
+    <div style="color: Red"><b>No orders were found</b></div>
 }
 else
 {
@@ -20,11 +46,16 @@ else
             <th>Order Status</th>
         </tr>
 
+        @{
+            int inc = 1;
+        }
+
         @foreach (var item in Model)
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.OrderID)
+                    @Html.DisplayFor(modelItem => item.OrderID)  
+                    @Html.HiddenFor(modelItem => item.OrderID, new { id = "oID" + inc + "" })
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.OrderDate)
@@ -39,10 +70,8 @@ else
                     }
                     else
                     {
-                        @Html.DropDownListFor(modelItem => item.OrderStatus, (IEnumerable<SelectListItem>)ViewData["statusList"], "--Select Order Status--")
-                        @Html.ValidationMessageFor(modelItem => item.OrderStatusID)
-                        <br />
-                        <input type="button" value="Update Order Status" onclick="location.href='@Url.Action("EditOrder", "Orders", new { id = item.OrderID, })'" />
+                        @Html.DropDownListFor(model => item.OrderStatusID, (IEnumerable<SelectListItem>)ViewData["statusList"], "--Select Order Status--", new { id = "ddlStatus" + inc + "" })
+                        <button type="button" onclick="updateStatus(@inc)">Update Order Status</button>
                     }
                 </td>
                 <td>
@@ -55,6 +84,9 @@ else
                     }
                 </td>
             </tr>
+            {
+                inc++;
+            }
     }
     </table>
 }
