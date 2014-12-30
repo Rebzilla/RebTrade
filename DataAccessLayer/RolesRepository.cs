@@ -17,6 +17,18 @@ namespace DataAccessLayer
             Entity.SaveChanges();
         }
 
+        public bool DoesRoleNameExist(string roleName)
+        {
+            if (Entity.Roles.Count(r => r.RoleName.ToLower() == roleName.ToLower()) == 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
         public void DeleteRole(Role r)
         {
             Role ro = Entity.Roles.Find(r.RoleID);

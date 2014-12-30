@@ -49,6 +49,8 @@
     <Compile Include="Cart.cs">
       <DependentUpon>TradersMarket.tt</DependentUpon>
     </Compile>
+    <Compile Include="CustomExceptions\CoreRoleException.cs" />
+    <Compile Include="CustomExceptions\RoleNameAlreadyExistsException.cs" />
     <Compile Include="Menu.cs">
       <DependentUpon>TradersMarket.tt</DependentUpon>
     </Compile>
