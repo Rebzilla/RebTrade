@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\..\..\..\..\Program Files (x86)\Microsoft ASP.NET\ASP.NET MVC 4\Packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Transactions" />
   </ItemGroup>
@@ -58,6 +61,10 @@
     <ProjectReference Include="..\BusinessLayer\BusinessLayer.csproj">
       <Project>{275a5786-45da-44ba-ab56-5c12d40dc013}</Project>
       <Name>BusinessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{c6bbd780-0b6e-4e5c-82dd-2b5372b25f8a}</Project>
+      <Name>Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\TradersMarketplace\TradersMarketplace.csproj">
       <Project>{6b8a36a7-2182-4622-9683-0ada6556d259}</Project>

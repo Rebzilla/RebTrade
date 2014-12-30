@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using BusinessLayer;
 using Common;
+using Common.CustomExceptions;
 using TradersMarketplace.Models;
 using System.Data;
 
@@ -27,7 +28,15 @@ namespace TradersMarketplace.Controllers
 
         public ActionResult DeleteRole(int roleID)
         {
-            new RolesBL().DeleteRole(roleID);
+            try
+            {
+                new RolesBL().DeleteRole(roleID);
+            }
+            catch (CoreRoleException e)
+            {
+                ViewBag.Message = e.Message.ToString();
+            }
+            
             List<Role> roles = (List<Role>)new RolesBL().GetAllRoles().ToList();
             return View("Index", roles);
         }
@@ -48,12 +57,21 @@ namespace TradersMarketplace.Controllers
         {
             if (ModelState.IsValid)
             {
-                new RolesBL().UpdateRole(role.RoleID, role.RoleName);
-                return RedirectToAction("Index");
+                try
+                {
+                    new RolesBL().UpdateRole(role.RoleID, role.RoleName);
+                    return RedirectToAction("Index");
+                }
+                catch(CoreRoleException e)
+                {
+                    ViewBag.Message = e.Message.ToString();
+                }
+                catch(RoleNameAlreadyExistsException ex)
+                {
+                    ViewBag.Message = ex.Message.ToString();
+                }
             }
             return View(role);
         }
-        
-
     }
 }

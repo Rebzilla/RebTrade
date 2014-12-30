@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using BusinessLayer;
 using Common;
+using Common.CustomExceptions;
 using TradersMarketplace.Models;
 
 namespace TradersMarketplace.Controllers
@@ -22,8 +23,16 @@ namespace TradersMarketplace.Controllers
         [HttpPost]
         public ActionResult Index(RoleModel data)
         {
-            new RolesBL().AddRole(data.RoleName);
-            return RedirectToAction("Index", "ViewRoles");
+            try
+            { 
+                new RolesBL().AddRole(data.RoleName);
+                return RedirectToAction("Index", "ViewRoles");
+            }
+            catch(RoleNameAlreadyExistsException e)
+            {
+                ViewBag.Message = e.Message.ToString();
+                return View();
+            }
         }
 
     }
