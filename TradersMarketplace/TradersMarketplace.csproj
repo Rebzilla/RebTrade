@@ -328,6 +328,7 @@
     <Content Include="Views\AddRole\Index.cshtml" />
     <Content Include="Views\ViewRoles\Index.cshtml" />
     <Content Include="Views\ViewRoles\EditRole.cshtml" />
+    <Content Include="Views\Home\_search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

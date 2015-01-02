@@ -50,6 +50,9 @@
     <Compile Include="ProductsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RolesRepository.cs" />
+    <Compile Include="SearchByProductCategory.cs" />
+    <Compile Include="SearchByProductDescription.cs" />
+    <Compile Include="SearchByProductName.cs" />
     <Compile Include="UsersRepository.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -57,6 +60,9 @@
       <Project>{c6bbd780-0b6e-4e5c-82dd-2b5372b25f8a}</Project>
       <Name>Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DecoratorClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

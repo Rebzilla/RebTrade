@@ -3,3 +3,90 @@
 }
 
 <h2>@ViewBag.Message</h2>
+
+<script type="text/javascript">
+    function filtername() {
+        if ($("#product").val() == "") {
+            alert("Search cannot be empty");
+        }
+        else {
+            var param = {
+                keyword: $('#product').val()
+            };
+            $.ajax({
+                url: '@Url.Action("SearchName")',
+                type: "POST",
+                datatype: "html",
+                UpdateTargetId: "divResult", // The DIV that will contain the partial view
+                data: param, // Passing the parameters var
+                error: function (xmlHttpRequest, errorText, thrownError) {
+                    alert("An error has occurred.");
+                },
+                success: function (data) {
+                    $('#divResult').empty();
+                    $('#divResult').html(data);
+                }
+            });
+        }
+    }
+
+    function filterdescription() {
+        if ($("#product").val() == "") {
+            alert("Search cannot be empty");
+        }
+        else {
+            var param = {
+                keyword: $('#product').val()
+            };
+            $.ajax({
+                url: '@Url.Action("SearchDescription")',
+                type: "POST",
+                datatype: "html",
+                UpdateTargetId: "divResult", // The DIV that will contain the partial view
+                data: param, // Passing the parameters var
+                error: function (xmlHttpRequest, errorText, thrownError) {
+                    alert("An error has occurred.");
+                },
+                success: function (data) {
+                    $('#divResult').empty();
+                    $('#divResult').html(data);
+                }
+            });
+        }
+    }
+
+    function filtercategory() {
+        if ($("#product").val() == "") {
+            alert("Search cannot be empty");
+        }
+        else {
+            var param = {
+                keyword: $('#product').val()
+            };
+            $.ajax({
+                url: '@Url.Action("SearchCategory")',
+                type: "POST",
+                datatype: "html",
+                UpdateTargetId: "divResult", // The DIV that will contain the partial view
+                data: param, // Passing the parameters var
+                error: function (xmlHttpRequest, errorText, thrownError) {
+                    alert("An error has occurred.");
+                },
+                success: function (data) {
+                    $('#divResult').empty();
+                    $('#divResult').html(data);
+                }
+            });
+        }
+    }
+</script>
+
+    @Html.Label("Search: ") <br />
+    @Html.TextBox("product")
+    <button type="button" onclick="filtername()">Search by Name</button>
+    <button type="button" onclick="filterdescription()">Search by Description</button>
+    <button type="button" onclick="filtercategory()">Search by Category</button>
+<br /> <br />
+
+<div id="divResult">
+</div>

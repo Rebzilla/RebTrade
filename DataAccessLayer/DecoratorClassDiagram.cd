@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DataAccessLayer.SearchByProductCategory">
+    <Position X="5.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAgAAA=</HashCode>
+      <FileName>SearchByProductCategory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataAccessLayer.SearchByProductDescription">
+    <Position X="3.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAA=</HashCode>
+      <FileName>SearchByProductDescription.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataAccessLayer.SearchByProductName">
+    <Position X="1.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAoAAA=</HashCode>
+      <FileName>SearchByProductName.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Common.Decorator.AdvancedSearchComponent&lt;T&gt;">
+    <Position X="3.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Common.Decorator.AdvancedSearchDecorator&lt;T&gt;">
+    <Position X="3.25" Y="2" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

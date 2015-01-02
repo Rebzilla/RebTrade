@@ -51,6 +51,8 @@
     </Compile>
     <Compile Include="CustomExceptions\CoreRoleException.cs" />
     <Compile Include="CustomExceptions\RoleNameAlreadyExistsException.cs" />
+    <Compile Include="Decorator\AdvancedSearchComponent.cs" />
+    <Compile Include="Decorator\AdvancedSearchDecorator.cs" />
     <Compile Include="Menu.cs">
       <DependentUpon>TradersMarket.tt</DependentUpon>
     </Compile>
