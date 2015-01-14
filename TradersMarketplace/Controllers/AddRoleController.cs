@@ -28,7 +28,7 @@ namespace TradersMarketplace.Controllers
                 new RolesBL().AddRole(data.RoleName);
                 return RedirectToAction("Index", "ViewRoles");
             }
-            catch(RoleNameAlreadyExistsException e)
+            catch(Exception e)
             {
                 ViewBag.Message = e.Message.ToString();
                 return View();

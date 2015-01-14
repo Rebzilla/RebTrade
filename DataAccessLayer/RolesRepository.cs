@@ -61,7 +61,6 @@ namespace DataAccessLayer
                 return Entity.Roles;
         }
 
-
         public IQueryable<Role> GetUserRoles(string username)
         {
             User u = Entity.Users.SingleOrDefault(x => x.Username == username);
