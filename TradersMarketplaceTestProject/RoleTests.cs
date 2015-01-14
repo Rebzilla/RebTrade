@@ -254,7 +254,7 @@ namespace TradersMarketplaceTestProject
             List<Role> previousRoles = rolesBL.GetAllRoles().ToList<Role>();
 
             //delete admin, buyer, seller or guest
-            int roleID = 1;
+            int roleID = 1; //guest
             rolesBL.DeleteRole(1);
             
             List<Role> expectedRoles = new List<Role>();
@@ -572,7 +572,6 @@ namespace TradersMarketplaceTestProject
         [ExpectedException(typeof(CoreRoleException))]
         public void UpdateRole_CoreRole_Test()
         {
-
             //get all the roles from the db
             List<Role> previousRoles = rolesBL.GetAllRoles().ToList<Role>();
 
