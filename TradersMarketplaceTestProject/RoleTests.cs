@@ -208,6 +208,24 @@ namespace TradersMarketplaceTestProject
 
         [TestMethod]
         [ExpectedException(typeof(FormatException))]
+        public void CreateRole_RolePunctuation_Test()
+        {
+            //get all the roles from the db
+            List<Role> previousRoles = rolesBL.GetAllRoles().ToList<Role>();
+            //add a new role to the db
+            string roleName = "TestRole!";
+            rolesBL.AddRole(roleName);
+
+            List<Role> expectedRoles = new List<Role>();
+            expectedRoles.AddRange(previousRoles); //add the previous Roles to the list
+
+            List<Role> actualRoles = rolesBL.GetAllRoles().ToList<Role>();
+            //check if expected roles with the actual roles are equal
+            AreListsEqual(expectedRoles, actualRoles);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(FormatException))]
         public void CreateRole_RoleCharacter_Test()
         {
             //get all the roles from the db
@@ -376,7 +394,7 @@ namespace TradersMarketplaceTestProject
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void ReadRole_EmptyRole_Test()
+        public void ReadRole_ZeroID_Test()
         {
             //get all the roles from the db
             List<Role> previousRoles = rolesBL.GetAllRoles().ToList<Role>();
@@ -390,26 +408,6 @@ namespace TradersMarketplaceTestProject
             //check if expected roles with the actual roles are equal
             AreListsEqual(expectedRoles, actualRoles);
         }
-
-        [TestMethod]
-        [ExpectedException(typeof(NullReferenceException))]
-        public void ReadRole_ZeroID_Test()
-        {
-            //get all the roles from the db
-            List<Role> previousRoles = rolesBL.GetAllRoles().ToList<Role>();
-
-            string roleName = "hello";
-            Role r = rolesBL.GetRoleByRoleName(roleName);
-            Role ro = rolesBL.GetRole(r.RoleID);
-
-            List<Role> expectedRoles = new List<Role>();
-            expectedRoles.AddRange(previousRoles); //add the previous Roles to the list
-
-            List<Role> actualRoles = rolesBL.GetAllRoles().ToList<Role>();
-            //check if expected roles with the actual roles are equal
-            AreListsEqual(expectedRoles, actualRoles);
-        }
-
         #endregion
 
         #region UpdateTest
@@ -499,6 +497,24 @@ namespace TradersMarketplaceTestProject
             List<Role> previousRoles = rolesBL.GetAllRoles().ToList<Role>();
 
             string newRoleName = "";
+            rolesBL.UpdateRole(-1, newRoleName);
+
+            List<Role> expectedRoles = new List<Role>();
+            expectedRoles.AddRange(previousRoles); //add the previous Roles to the list
+
+            List<Role> actualRoles = rolesBL.GetAllRoles().ToList<Role>();
+            //check if expected roles with the actual roles are equal
+            AreListsEqual(expectedRoles, actualRoles);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(NullReferenceException))]
+        public void UpdateRole_NegativeID_Test()
+        {
+            //get all the roles from the db
+            List<Role> previousRoles = rolesBL.GetAllRoles().ToList<Role>();
+
+            string newRoleName = "hello";
             rolesBL.UpdateRole(-1, newRoleName);
 
             List<Role> expectedRoles = new List<Role>();
@@ -610,6 +626,60 @@ namespace TradersMarketplaceTestProject
             //List<Role> actualRoles = rolesBL.GetAllRoles().ToList<Role>();
             ////check if expected roles with the actual roles are equal
             //AreListsEqual(expectedRoles, actualRoles);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(FormatException))]
+        public void UpdateRole_RoleCharacter_Test()
+        {
+            //get all the roles from the db
+            List<Role> previousRoles = rolesBL.GetAllRoles().ToList<Role>();
+
+            string newRoleName = "TestRoleж";
+            rolesBL.UpdateRole(13, newRoleName);
+
+            List<Role> expectedRoles = new List<Role>();
+            expectedRoles.AddRange(previousRoles); //add the previous Roles to the list
+
+            List<Role> actualRoles = rolesBL.GetAllRoles().ToList<Role>();
+            //check if expected roles with the actual roles are equal
+            AreListsEqual(expectedRoles, actualRoles);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(FormatException))]
+        public void UpdateRole_RoleNumber_Test()
+        {
+            //get all the roles from the db
+            List<Role> previousRoles = rolesBL.GetAllRoles().ToList<Role>();
+
+            string newRoleName = "TestRole1";
+            rolesBL.UpdateRole(13, newRoleName);
+
+            List<Role> expectedRoles = new List<Role>();
+            expectedRoles.AddRange(previousRoles); //add the previous Roles to the list
+
+            List<Role> actualRoles = rolesBL.GetAllRoles().ToList<Role>();
+            //check if expected roles with the actual roles are equal
+            AreListsEqual(expectedRoles, actualRoles);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(FormatException))]
+        public void UpdateRole_RolePunctuation_Test()
+        {
+            //get all the roles from the db
+            List<Role> previousRoles = rolesBL.GetAllRoles().ToList<Role>();
+
+            string newRoleName = "TestRole1";
+            rolesBL.UpdateRole(13, newRoleName);
+
+            List<Role> expectedRoles = new List<Role>();
+            expectedRoles.AddRange(previousRoles); //add the previous Roles to the list
+
+            List<Role> actualRoles = rolesBL.GetAllRoles().ToList<Role>();
+            //check if expected roles with the actual roles are equal
+            AreListsEqual(expectedRoles, actualRoles);
         }
         #endregion
     }
